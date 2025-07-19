@@ -1,0 +1,83 @@
+/* Custom Leaflet Map Styles */
+
+/* Improve popup styling */
+.leaflet-popup-content-wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+.leaflet-popup-tip {
+  background: white;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Improve zoom control styling */
+.leaflet-control-zoom {
+  border: none !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+  font-weight: bold !important;
+  transition: all 0.2s ease !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #f9fafb !important;
+  border-color: #F95700 !important;
+  color: #F95700 !important;
+}
+
+/* Improve attribution styling */
+.leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 4px !important;
+  font-size: 10px !important;
+  padding: 2px 6px !important;
+}
+
+/* Custom marker shadow enhancement */
+.leaflet-marker-shadow {
+  filter: blur(1px) opacity(0.4);
+}
+
+/* Map container improvements */
+.leaflet-container {
+  font-family: inherit;
+  background: #f8fafc;
+}
+
+/* Smooth tile loading */
+.leaflet-tile {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.leaflet-tile-loaded {
+  opacity: 1;
+}
+
+/* Custom popup styling for Highway Academy */
+.custom-popup .leaflet-popup-content-wrapper {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 2px solid #F95700;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(249, 87, 0, 0.15);
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+  border: 2px solid #F95700;
+}
