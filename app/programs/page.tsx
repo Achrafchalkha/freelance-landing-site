@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { BookOpen, Languages, GraduationCap, Clock, Users, Award } from "lucide-react"
 import Link from "next/link"
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 
 const academicPrograms = [
@@ -101,7 +101,8 @@ const languageCourses = [
   },
 ]
 
-export default function ProgramsPage() {
+// Component that uses useSearchParams - wrapped in Suspense
+function ProgramsContent() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState("language")
   const [isLoading, setIsLoading] = useState(true)
@@ -314,5 +315,21 @@ export default function ProgramsPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+// Main export with Suspense boundary
+export default function ProgramsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#121212] pt-16 sm:pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-2 border-[#333] border-t-[#F95700] mx-auto mb-4"></div>
+          <p className="text-[#AAAAAA] text-lg">Loading programs...</p>
+        </div>
+      </div>
+    }>
+      <ProgramsContent />
+    </Suspense>
   )
 }
