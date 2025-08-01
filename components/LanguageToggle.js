@@ -2,14 +2,13 @@
 
 import { useLanguage } from '@/hooks/useLanguage';
 import { Button } from './ui/button';
-import { Languages } from 'lucide-react';
 
 export function LanguageToggle() {
   const { language, toggleLanguage, isRTL } = useLanguage();
 
   return (
     <div 
-      className="fixed pointer-events-auto"
+      className="fixed pointer-events-auto flex gap-2"
       style={{ 
         bottom: '24px', 
         right: '24px',
@@ -18,16 +17,30 @@ export function LanguageToggle() {
       }}
     >
       <Button
-        onClick={toggleLanguage}
-        className="bg-[#F95700] hover:bg-[#E04E00] text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 rounded-full p-3 h-12 w-12 flex items-center justify-center group"
-        title={language === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+        onClick={() => language !== 'ar' && toggleLanguage()}
+        className={`${
+          language === 'ar' 
+            ? 'bg-[#F95700] text-white' 
+            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+        } shadow-lg transition-all duration-300 rounded-full px-4 py-2 h-10 flex items-center justify-center border border-gray-600`}
+        title="Switch to Arabic"
       >
-        <div className="flex items-center justify-center">
-          <Languages className="h-5 w-5 mr-1" />
-          <span className="text-sm font-bold">
-            {language === 'en' ? 'AR' : 'EN'}
-          </span>
-        </div>
+        <span className="text-sm font-medium">
+          عربي
+        </span>
+      </Button>
+      <Button
+        onClick={() => language !== 'en' && toggleLanguage()}
+        className={`${
+          language === 'en' 
+            ? 'bg-[#F95700] text-white' 
+            : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+        } shadow-lg transition-all duration-300 rounded-full px-4 py-2 h-10 flex items-center justify-center border border-gray-600`}
+        title="Switch to English"
+      >
+        <span className="text-sm font-medium">
+          EN
+        </span>
       </Button>
     </div>
   );
