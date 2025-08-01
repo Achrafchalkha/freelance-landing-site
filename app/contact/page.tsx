@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { useLanguage } from "@/hooks/useLanguage"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -26,22 +27,22 @@ const LeafletMap = dynamic(() => import("@/components/LeafletMap"), {
   )
 })
 
-const locations = [
+const getLocations = (t: any) => [
   {
-    name: "Highway Academy Montfleuri",
-    address: "Montfleuri, Fez, Morocco",
-    addressArabic: "فاس منفلوري 2، قرب مسجد سعد بن ابي الوقاص، خلف مقهى امبريال، امام ترمينيس الحافلات 23 (صفراء) ",
-    phone: "+212 535765701",
+    name: t('contact.locations.montfleuri.name'),
+    address: t('contact.locations.montfleuri.address'),
+    addressArabic: t('contact.locations.montfleuri.address_arabic'),
+    phone: t('contact.locations.montfleuri.phone'),
     coordinates: "34.00595865995687, -4.984858206671568",
     latitude: 34.00595865995687,
     longitude: -4.984858206671568,
     googleMapsUrl: "https://www.google.com/maps?q=34.00595865995687,-4.984858206671568",
   },
   {
-    name: "Highway Academy Narjiss",
-    address: "Narjiss, Fez, Morocco",
-    addressArabic: "فاس ،النرجس، حي الامل، قرب مزرعة الشرايبي، فوق مقهى افيسان",
-    phone: "+212 535614990",
+    name: t('contact.locations.narjiss.name'),
+    address: t('contact.locations.narjiss.address'),
+    addressArabic: t('contact.locations.narjiss.address_arabic'),
+    phone: t('contact.locations.narjiss.phone'),
     coordinates: "34.008281113881154, -4.969071282883572",
     latitude: 34.008281113881154,
     longitude: -4.969071282883572,
@@ -49,50 +50,46 @@ const locations = [
   },
 ]
 
-const faqs = [
+const getFaqs = (t: any) => [
   {
-    question: "What subjects do you teach?",
-    answer:
-      "We offer comprehensive tutoring across all subjects from primary school to university level, including Mathematics, Sciences, Languages, Literature, and specialized exam preparation courses.",
+    question: t('contact.faq.questions.subjects.question'),
+    answer: t('contact.faq.questions.subjects.answer'),
   },
   {
-    question: "What are your class sizes?",
-    answer:
-      "We maintain small class sizes with a maximum of 18 students per class to ensure personalized attention and effective learning for each student.",
+    question: t('contact.faq.questions.class_sizes.question'),
+    answer: t('contact.faq.questions.class_sizes.answer'),
   },
   {
-    question: "Do you offer individual tutoring?",
-    answer:
-      "Yes, we offer both group classes and individual one-on-one tutoring sessions based on your specific needs and preferences.",
+    question: t('contact.faq.questions.individual_tutoring.question'),
+    answer: t('contact.faq.questions.individual_tutoring.answer'),
   },
   {
-    question: "What are your operating hours?",
-    answer:
-      "We are open Monday to Saturday from 9:00 AM to 11:00 PM, with flexible scheduling options including morning, afternoon, and evening classes.",
+    question: t('contact.faq.questions.operating_hours.question'),
+    answer: t('contact.faq.questions.operating_hours.answer'),
   },
   {
-    question: "How do I enroll in a course?",
-    answer:
-      "You can enroll by visiting either of our locations, calling us directly, or filling out the contact form on this page. We'll schedule a consultation to discuss your goals and recommend the best program.",
+    question: t('contact.faq.questions.enrollment.question'),
+    answer: t('contact.faq.questions.enrollment.answer'),
   },
   {
-    question: "Do you prepare students for international exams?",
-    answer:
-      "Yes, we offer specialized preparation courses for TOEFL, IELTS, DELF, DALF, and other international language proficiency exams.",
+    question: t('contact.faq.questions.international_exams.question'),
+    answer: t('contact.faq.questions.international_exams.answer'),
   },
   {
-    question: "What makes Highway Academy different?",
-    answer:
-      "Our personalized approach, experienced instructors, small class sizes, and proven track record of student success set us apart. We focus on each student's individual learning style and goals.",
+    question: t('contact.faq.questions.what_makes_different.question'),
+    answer: t('contact.faq.questions.what_makes_different.answer'),
   },
   {
-    question: "Are there any age restrictions?",
-    answer:
-      "We welcome students of all ages, from primary school children to university students and working professionals looking to enhance their skills.",
+    question: t('contact.faq.questions.age_restrictions.question'),
+    answer: t('contact.faq.questions.age_restrictions.answer'),
   },
 ]
 
 export default function ContactPage() {
+  const { t } = useLanguage()
+  const locations = getLocations(t)
+  const faqs = getFaqs(t)
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -164,9 +161,9 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-[#1E1E1E] to-[#121212]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5F5F5] mb-6">Contact & FAQ</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5F5F5] mb-6">{t('contact.hero.title')}</h1>
           <p className="text-lg sm:text-xl text-[#AAAAAA] max-w-3xl mx-auto px-4">
-            Get in touch with us or find answers to frequently asked questions. We're here to help you succeed.
+            {t('contact.hero.subtitle')}
           </p>
         </div>
       </section>
@@ -178,7 +175,7 @@ export default function ContactPage() {
             {/* Contact Details */}
             <div className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-6 sm:mb-8">Get in Touch</h2>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-6 sm:mb-8">{t('contact.get_in_touch.title')}</h2>
 
                 {/* Locations */}
                 <div className="space-y-4 sm:space-y-6">
@@ -223,7 +220,7 @@ export default function ContactPage() {
                 {/* General Contact Info */}
                 <Card className="bg-[#1E1E1E] border-[#333]">
                   <CardHeader>
-                    <CardTitle className="text-lg sm:text-xl text-[#F95700]">General Information</CardTitle>
+                    <CardTitle className="text-lg sm:text-xl text-[#F95700]">{t('contact.general_info.title')}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center text-[#AAAAAA]">
@@ -232,12 +229,12 @@ export default function ContactPage() {
                         href="mailto:info@highwayacademy.ma"
                         className="hover:text-[#F95700] transition-colors text-sm sm:text-base"
                       >
-                        info@highwayacademy.ma
+                        {t('contact.general_info.email')}
                       </a>
                     </div>
                     <div className="flex items-center text-[#AAAAAA]">
                       <Clock className="h-3 w-3 sm:h-4 sm:w-4 text-[#F95700] mr-2" />
-                      <span className="text-sm sm:text-base">Monday - Saturday: 9:00 AM - 11:00 PM</span>
+                      <span className="text-sm sm:text-base">{t('contact.general_info.hours')}</span>
                     </div>
                     <div className="flex items-center space-x-4 pt-2">
                       <a href="#" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
@@ -256,20 +253,20 @@ export default function ContactPage() {
             <div className="space-y-6 sm:space-y-8">
               {/* Interactive Maps */}
               <div>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5] mb-4 sm:mb-6">Our Locations</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5] mb-4 sm:mb-6">{t('contact.map.title')}</h3>
                 <Tabs defaultValue="montfleuri" className="w-full">
                   <TabsList className="grid w-full grid-cols-2 bg-[#1E1E1E] border border-[#333]">
                     <TabsTrigger
                       value="montfleuri"
                       className="data-[state=active]:bg-[#F95700] data-[state=active]:text-white text-[#AAAAAA] text-sm sm:text-base"
                     >
-                      Montfleuri
+                      {t('contact.map.montfleuri')}
                     </TabsTrigger>
                     <TabsTrigger
                       value="narjiss"
                       className="data-[state=active]:bg-[#F95700] data-[state=active]:text-white text-[#AAAAAA] text-sm sm:text-base"
                     >
-                      Narjiss
+                      {t('contact.map.narjiss')}
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="montfleuri" className="mt-4">
@@ -289,7 +286,7 @@ export default function ContactPage() {
                           className="inline-flex items-center text-[#F95700] hover:text-[#E04E00] transition-colors text-sm"
                         >
                           <MapPin className="h-4 w-4 mr-1" />
-                          Open in Google Maps
+                          {t('contact.map.open_google_maps')}
                         </a>
                       </div>
                     </div>
@@ -311,7 +308,7 @@ export default function ContactPage() {
                           className="inline-flex items-center text-[#F95700] hover:text-[#E04E00] transition-colors text-sm"
                         >
                           <MapPin className="h-4 w-4 mr-1" />
-                          Open in Google Maps
+                          {t('contact.map.open_google_maps')}
                         </a>
                       </div>
                     </div>
@@ -322,7 +319,7 @@ export default function ContactPage() {
               {/* Contact Form */}
               <Card id="contact-form" className="bg-[#1E1E1E] border-[#333]">
                 <CardHeader>
-                  <CardTitle className="text-lg sm:text-xl text-[#F5F5F5]">Send us a Message</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl text-[#F5F5F5]">{t('contact.form.title')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-4">
@@ -330,7 +327,7 @@ export default function ContactPage() {
                       <div>
                         <Input
                           name="name"
-                          placeholder="Your Name"
+                          placeholder={t('contact.form.name_placeholder')}
                           value={formData.name}
                           onChange={handleChange}
                           maxLength={100}
@@ -344,7 +341,7 @@ export default function ContactPage() {
                       <Input
                         name="email"
                         type="email"
-                        placeholder="Your Email"
+                        placeholder={t('contact.form.email_placeholder')}
                         value={formData.email}
                         onChange={handleChange}
                         className="bg-[#121212] border-[#333] text-[#F5F5F5] placeholder-[#AAAAAA] text-sm sm:text-base"
@@ -354,7 +351,7 @@ export default function ContactPage() {
                     <div>
                       <Input
                         name="subject"
-                        placeholder="Subject"
+                        placeholder={t('contact.form.subject_placeholder')}
                         value={formData.subject}
                         onChange={handleChange}
                         maxLength={200}
@@ -368,7 +365,7 @@ export default function ContactPage() {
                     <div>
                       <Textarea
                         name="message"
-                        placeholder="Your Message"
+                        placeholder={t('contact.form.message_placeholder')}
                         value={formData.message}
                         onChange={handleChange}
                         rows={5}
@@ -388,10 +385,10 @@ export default function ContactPage() {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Sending...
+                          {t('contact.form.sending')}
                         </>
                       ) : (
-                        'Send Message'
+                        t('contact.form.send_button')
                       )}
                     </Button>
                   </form>
@@ -406,9 +403,9 @@ export default function ContactPage() {
       <section className="py-16 sm:py-20 bg-[#1E1E1E]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">{t('contact.faq.title')}</h2>
             <p className="text-[#AAAAAA] max-w-2xl mx-auto text-sm sm:text-base px-4">
-              Find answers to common questions about our programs, enrollment process, and services.
+              {t('contact.faq.subtitle')}
             </p>
           </div>
 
@@ -431,12 +428,12 @@ export default function ContactPage() {
           </Accordion>
 
           <div className="mt-8 sm:mt-12 text-center">
-            <p className="text-[#AAAAAA] mb-4 text-sm sm:text-base">Still have questions? We're here to help!</p>
+            <p className="text-[#AAAAAA] mb-4 text-sm sm:text-base">{t('contact.faq.still_have_questions')}</p>
             <Button
               onClick={scrollToContactForm}
               className="bg-[#F95700] hover:bg-[#E04E00] text-white px-6 sm:px-8 py-3 transition-all duration-300 transform hover:scale-105"
             >
-              Contact Us Directly
+              {t('contact.faq.contact_directly')}
             </Button>
           </div>
         </div>

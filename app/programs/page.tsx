@@ -3,113 +3,92 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { BookOpen, Languages, GraduationCap, Clock, Users, Award } from "lucide-react"
+import { BookOpen, Languages, GraduationCap, Clock, Users, Award, Globe, Target, CheckCircle } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-
-const academicPrograms = [
-  {
-    level: "Primary School",
-    subjects: ["Mathematics", "Arabic", "French", "English"],
-    description: "Building strong foundations in core subjects with engaging, age-appropriate methods.",
-  },
-  {
-    level: "Middle School",
-    subjects: ["French", "English", "Physics", "Science", "Mathematics"],
-    description: "Comprehensive support across all subjects to ensure smooth transition to high school.",
-  },
-  {
-    level: "High School",
-    subjects: [
-      "English",
-      "Arabic",
-      "French",
-      "Philosophy",
-      "Physics & Chemistry",
-      "Biology",
-      "Mathematics",
-      "History & Geography",
-      "Islamic Studies",
-      "Economics & Management",
-      "Technology",
-    ],
-    description:
-      "We support all educational streams (Literary, Scientific, Technical) with comprehensive coverage of core subjects and exam preparation for both regional and national levels.",
-  },
-  {
-    level: "University Support",
-    subjects: [
-      "English",
-      "French",
-      "Biology",
-      "Chemistry",
-      "Physics",
-      "Economics",
-      "Research Writing",
-      "Business English",
-      "Presentation Skills",
-    ],
-    description:
-      "We provide academic assistance in languages, scientific subjects, and essential skills like research writing and presentations to enhance academic and professional performance.",
-  },
-]
-
-const languageCourses = [
-  {
-    title: "General English",
-    levels: "A1 - C2",
-    description:
-      "Comprehensive English language training covering all four skills: speaking, listening, reading, and writing.",
-    features: ["Interactive lessons", "Conversation practice", "Grammar mastery", "Vocabulary building"],
-  },
-  {
-    title: "Business English",
-    levels: "B1 - C2",
-    description: "Professional English for workplace communication, presentations, and business correspondence.",
-    features: ["Business vocabulary", "Professional communication", "Presentation skills", "Email writing"],
-  },
-  {
-    title: "TOEFL Preparation",
-    levels: "B2 - C2",
-    description: "Intensive preparation for the TOEFL exam with practice tests and targeted skill development.",
-    features: ["Mock exams", "Test strategies", "Time management", "Score improvement"],
-  },
-  {
-    title: "IELTS Preparation",
-    levels: "B2 - C2",
-    description: "Comprehensive IELTS preparation covering all four modules with expert guidance.",
-    features: ["Band score improvement", "Speaking practice", "Writing techniques", "Listening skills"],
-  },
-  {
-    title: "French Language",
-    levels: "A1 - C2",
-    description: "Complete French language program from beginner to advanced levels.",
-    features: ["Native speaker instruction", "Cultural immersion", "DELF/DALF prep", "Conversation clubs"],
-  },
-  {
-    title: "Arabic Reading & Writing for Kids and Teens",
-    levels: "All levels",
-    description:
-      "Comprehensive Arabic literacy program designed specifically for children and teenagers to master reading and writing skills.",
-    features: [
-      "Age-appropriate curriculum",
-      "Interactive learning methods",
-      "Cultural context integration",
-      "Progress tracking",
-    ],
-  },
-]
+import { useLanguage } from '@/hooks/useLanguage'
 
 // Component that uses useSearchParams - wrapped in Suspense
 function ProgramsContent() {
+  const { t, isRTL } = useLanguage()
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState("language")
   const [isLoading, setIsLoading] = useState(true)
 
+  // Academic programs data will be generated from translations
+  const getAcademicPrograms = () => [
+    {
+      level: t('programs.academic_programs.primary_school.level'),
+      subjects: t('programs.academic_programs.primary_school.subjects'),
+      description: t('programs.academic_programs.primary_school.description'),
+    },
+    {
+      level: t('programs.academic_programs.middle_school.level'),
+      subjects: t('programs.academic_programs.middle_school.subjects'),
+      description: t('programs.academic_programs.middle_school.description'),
+    },
+    {
+      level: t('programs.academic_programs.high_school.level'),
+      subjects: t('programs.academic_programs.high_school.subjects'),
+      description: t('programs.academic_programs.high_school.description'),
+    },
+    {
+      level: t('programs.academic_programs.university_support.level'),
+      subjects: t('programs.academic_programs.university_support.subjects'),
+      description: t('programs.academic_programs.university_support.description'),
+    },
+  ]
+
+  // Language courses data will be generated from translations
+  const getLanguageCourses = () => [
+    {
+      title: t('programs.language_courses.general_english.title'),
+      levels: t('programs.language_courses.general_english.levels'),
+      description: t('programs.language_courses.general_english.description'),
+      features: t('programs.language_courses.general_english.features'),
+      icon: Globe
+    },
+    {
+      title: t('programs.language_courses.business_english.title'),
+      levels: t('programs.language_courses.business_english.levels'),
+      description: t('programs.language_courses.business_english.description'),
+      features: t('programs.language_courses.business_english.features'),
+      icon: Target
+    },
+    {
+      title: t('programs.language_courses.toefl_preparation.title'),
+      levels: t('programs.language_courses.toefl_preparation.levels'),
+      description: t('programs.language_courses.toefl_preparation.description'),
+      features: t('programs.language_courses.toefl_preparation.features'),
+      icon: Award
+    },
+    {
+      title: t('programs.language_courses.ielts_preparation.title'),
+      levels: t('programs.language_courses.ielts_preparation.levels'),
+      description: t('programs.language_courses.ielts_preparation.description'),
+      features: t('programs.language_courses.ielts_preparation.features'),
+      icon: CheckCircle
+    },
+    {
+      title: t('programs.language_courses.french_language.title'),
+      levels: t('programs.language_courses.french_language.levels'),
+      description: t('programs.language_courses.french_language.description'),
+      features: t('programs.language_courses.french_language.features'),
+      icon: Globe
+    },
+    {
+      title: t('programs.language_courses.arabic_kids.title'),
+      levels: t('programs.language_courses.arabic_kids.levels'),
+      description: t('programs.language_courses.arabic_kids.description'),
+      features: t('programs.language_courses.arabic_kids.features'),
+      icon: BookOpen
+    }
+  ]
+
   // Memoize heavy data to prevent re-computation
-  const memoizedAcademicPrograms = useMemo(() => academicPrograms, [])
-  const memoizedLanguageCourses = useMemo(() => languageCourses, [])
+  const memoizedAcademicPrograms = useMemo(() => getAcademicPrograms(), [t])
+  const memoizedLanguageCourses = useMemo(() => getLanguageCourses(), [t])
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -138,10 +117,9 @@ function ProgramsContent() {
       {/* Hero Section */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-[#1E1E1E] to-[#121212]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5F5F5] mb-6">Our Programs</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#F5F5F5] mb-6">{t('programs.title')}</h1>
           <p className="text-lg sm:text-xl text-[#AAAAAA] max-w-3xl mx-auto px-4">
-            Discover our comprehensive range of educational programs designed to meet your specific learning goals and
-            academic aspirations.
+            {t('programs.subtitle')}
           </p>
         </div>
       </section>
@@ -156,7 +134,7 @@ function ProgramsContent() {
                 className="data-[state=active]:bg-[#F95700] data-[state=active]:text-white text-[#AAAAAA] text-sm sm:text-base"
               >
                 <Languages className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                <span className="hidden sm:inline">Language & Skills Courses</span>
+                <span className="hidden sm:inline">{t('programs.language_tab')}</span>
                 <span className="sm:hidden">Language</span>
               </TabsTrigger>
               <TabsTrigger
@@ -164,7 +142,7 @@ function ProgramsContent() {
                 className="data-[state=active]:bg-[#F95700] data-[state=active]:text-white text-[#AAAAAA] text-sm sm:text-base"
               >
                 <BookOpen className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                <span className="hidden sm:inline">Academic Support</span>
+                <span className="hidden sm:inline">{t('programs.academic_tab')}</span>
                 <span className="sm:hidden">Academic</span>
               </TabsTrigger>
             </TabsList>
@@ -172,9 +150,9 @@ function ProgramsContent() {
             <TabsContent value="language" id="language">
               <div className="space-y-6 sm:space-y-8">
                 <div className="text-center mb-8 sm:mb-12">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">Language & Skills Courses</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">{t('programs.language_section.title')}</h2>
                   <p className="text-[#AAAAAA] max-w-3xl mx-auto text-sm sm:text-base px-4">
-                    Master new languages and develop essential skills with our expert instructors.
+                    {t('programs.language_section.subtitle')}
                   </p>
                 </div>
 
@@ -182,7 +160,7 @@ function ProgramsContent() {
                   {memoizedLanguageCourses.map((course, index) => (
                     <Card
                       key={index}
-                      className="bg-[#1E1E1E] border-[#333] hover:border-[#F95700] transition-all duration-300 h-full flex flex-col"
+                                          className="bg-[#1E1E1E] border-[#333] hover:border-[#F95700] transition-all duration-300 h-full flex flex-col"
                     >
                       <CardHeader className="flex-shrink-0">
                         <div className="flex items-center justify-between flex-wrap gap-2">
@@ -198,14 +176,14 @@ function ProgramsContent() {
                       <CardContent className="flex-grow flex flex-col">
                         <div className="space-y-3 flex-grow">
                           <h4 className="font-semibold text-[#F5F5F5] flex items-center text-sm sm:text-base">
-                            <Award className="h-3 w-3 sm:h-4 sm:w-4 text-[#F95700] mr-2" />
-                            Key Features:
+                            <course.icon className="h-3 w-3 sm:h-4 sm:w-4 text-[#F95700] me-2" />
+                            <span>{t('programs.language_section.key_features')}</span>
                           </h4>
                           <ul className="space-y-2">
-                            {course.features.map((feature, featureIndex) => (
+                            {Array.isArray(course.features) && course.features.map((feature, featureIndex) => (
                               <li key={featureIndex} className="flex items-center text-[#AAAAAA] text-xs sm:text-sm">
-                                <div className="w-2 h-2 bg-[#F95700] rounded-full mr-3 flex-shrink-0"></div>
-                                {feature}
+                                <div className="w-2 h-2 bg-[#F95700] rounded-full flex-shrink-0 me-3"></div>
+                                <span>{feature}</span>
                               </li>
                             ))}
                           </ul>
@@ -220,9 +198,9 @@ function ProgramsContent() {
             <TabsContent value="academic" id="academic">
               <div className="space-y-6 sm:space-y-8">
                 <div className="text-center mb-8 sm:mb-12">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">Academic Support Programs</h2>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-[#F5F5F5] mb-4">{t('programs.academic_section.title')}</h2>
                   <p className="text-[#AAAAAA] max-w-3xl mx-auto text-sm sm:text-base px-4">
-                    Comprehensive tutoring and academic support from primary school through university level.
+                    {t('programs.academic_section.subtitle')}
                   </p>
                 </div>
 
@@ -233,7 +211,7 @@ function ProgramsContent() {
                       value={`item-${index}`}
                       className="bg-[#1E1E1E] border border-[#333] rounded-lg px-4 sm:px-6"
                     >
-                      <AccordionTrigger className="text-[#F5F5F5] hover:text-[#F95700] text-left">
+                      <AccordionTrigger className="text-[#F5F5F5] hover:text-[#F95700]">
                         <div className="flex items-center space-x-3">
                           <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 text-[#F95700]" />
                           <span className="text-lg sm:text-xl font-semibold">{program.level}</span>
@@ -242,7 +220,7 @@ function ProgramsContent() {
                       <AccordionContent className="text-[#AAAAAA] pt-4">
                         <p className="mb-4 text-sm sm:text-base">{program.description}</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
-                          {program.subjects.map((subject, subIndex) => (
+                          {Array.isArray(program.subjects) && program.subjects.map((subject, subIndex) => (
                             <div
                               key={subIndex}
                               className="bg-[#121212] px-3 py-2 rounded-md text-xs sm:text-sm border border-[#333]"
@@ -264,9 +242,9 @@ function ProgramsContent() {
             <Card className="bg-[#1E1E1E] border-[#333] text-center h-full flex flex-col">
               <CardContent className="p-4 sm:p-6 flex flex-col h-full">
                 <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-[#F95700] mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">Flexible Scheduling</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">{t('programs.features.flexible_scheduling.title')}</h3>
                 <p className="text-[#AAAAAA] text-sm sm:text-base flex-grow">
-                  Morning, afternoon, and evening classes to fit your schedule.
+                  {t('programs.features.flexible_scheduling.description')}
                 </p>
               </CardContent>
             </Card>
@@ -274,9 +252,9 @@ function ProgramsContent() {
             <Card className="bg-[#1E1E1E] border-[#333] text-center h-full flex flex-col">
               <CardContent className="p-4 sm:p-6 flex flex-col h-full">
                 <Users className="h-10 w-10 sm:h-12 sm:w-12 text-[#F95700] mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">Small Class Sizes</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">{t('programs.features.small_classes.title')}</h3>
                 <p className="text-[#AAAAAA] text-sm sm:text-base flex-grow">
-                  Maximum 8 students per class for personalized attention.
+                  {t('programs.features.small_classes.description')}
                 </p>
               </CardContent>
             </Card>
@@ -284,9 +262,9 @@ function ProgramsContent() {
             <Card className="bg-[#1E1E1E] border-[#333] text-center h-full flex flex-col">
               <CardContent className="p-4 sm:p-6 flex flex-col h-full">
                 <Award className="h-10 w-10 sm:h-12 sm:w-12 text-[#F95700] mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">Certified Instructors</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-[#F5F5F5] mb-2">{t('programs.features.certified_instructors.title')}</h3>
                 <p className="text-[#AAAAAA] text-sm sm:text-base flex-grow">
-                  All our teachers are qualified and experienced professionals.
+                  {t('programs.features.certified_instructors.description')}
                 </p>
               </CardContent>
             </Card>
@@ -296,10 +274,10 @@ function ProgramsContent() {
           <div className="mt-16 sm:mt-20 text-center">
             <div className="bg-[#1E1E1E] rounded-lg p-6 sm:p-8 border border-[#333]">
               <h3 className="text-xl sm:text-2xl font-bold text-[#F5F5F5] mb-4">
-                Ready to Start Your Learning Journey?
+                {t('programs.cta.title')}
               </h3>
               <p className="text-[#AAAAAA] mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4">
-                Contact us today to discuss your educational goals and find the perfect program for you.
+                {t('programs.cta.description')}
               </p>
               <div className="flex justify-center">
                 <Button
@@ -307,7 +285,7 @@ function ProgramsContent() {
                   variant="outline"
                   className="border-[#F95700] text-[#F95700] hover:bg-[#F95700] hover:text-white px-6 sm:px-8 py-3 bg-transparent w-full sm:w-auto"
                 >
-                  <Link href="/contact">Schedule Consultation</Link>
+                  <Link href="/contact">{t('programs.cta.button')}</Link>
                 </Button>
               </div>
             </div>
@@ -318,17 +296,24 @@ function ProgramsContent() {
   )
 }
 
+// Loading component that can use translations
+function LoadingFallback() {
+  const { t, isRTL } = useLanguage()
+  
+  return (
+    <div className={`min-h-screen bg-[#121212] pt-16 sm:pt-20 flex items-center justify-center ${isRTL ? 'text-right' : 'text-left'}`}>
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F95700] mx-auto mb-4"></div>
+        <p className="text-[#AAAAAA]">{t('programs.loading')}</p>
+      </div>
+    </div>
+  )
+}
+
 // Main export with Suspense boundary
 export default function ProgramsPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-[#121212] pt-16 sm:pt-20 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-2 border-[#333] border-t-[#F95700] mx-auto mb-4"></div>
-          <p className="text-[#AAAAAA] text-lg">Loading programs...</p>
-        </div>
-      </div>
-    }>
+    <Suspense fallback={<LoadingFallback />}>
       <ProgramsContent />
     </Suspense>
   )

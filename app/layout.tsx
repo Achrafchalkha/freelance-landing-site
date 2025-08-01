@@ -1,14 +1,17 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Noto_Sans_Arabic } from "next/font/google"
 import "./globals.css"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { PerformanceOptimizer } from "@/components/PerformanceOptimizer"
+import { LanguageProvider } from "@/contexts/LanguageContext"
+import { LanguageToggle } from "@/components/LanguageToggle"
 import { Toaster } from "sonner"
 
 const inter = Inter({ subsets: ["latin"] })
+const notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"] })
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -159,23 +162,26 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-[#121212] text-[#F5F5F5] antialiased`}>
-        <PerformanceOptimizer />
-        <Navigation />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-        <ScrollToTop />
-        <Toaster
-          theme="dark"
-          position="top-right"
-          toastOptions={{
-            style: {
-              background: '#1E1E1E',
-              border: '1px solid #333',
-              color: '#F5F5F5',
-            },
-          }}
-        />
+      <body className={`${inter.className} ${notoSansArabic.className} bg-[#121212] text-[#F5F5F5] antialiased`}>
+        <LanguageProvider>
+          <PerformanceOptimizer />
+          <Navigation />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+          <ScrollToTop />
+          <LanguageToggle />
+          <Toaster
+            theme="dark"
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: '#1E1E1E',
+                border: '1px solid #333',
+                color: '#F5F5F5',
+              },
+            }}
+          />
+        </LanguageProvider>
       </body>
     </html>
   )

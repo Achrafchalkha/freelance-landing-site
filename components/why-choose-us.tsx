@@ -1,38 +1,43 @@
-import { Brain, Award, Users, Target } from "lucide-react"
+"use client"
 
-const features = [
-  {
-    icon: Brain,
-    title: "Expert Tutors",
-    description: "Learn from the best minds in Fez, dedicated to your growth and success in every subject.",
-  },
-  {
-    icon: Award,
-    title: "Proven Results",
-    description: "Track record of academic excellence and student achievement across all educational levels.",
-  },
-  {
-    icon: Users,
-    title: "Supportive Environment",
-    description: "Collaborative learning atmosphere that encourages growth, builds confidence, and fosters success.",
-  },
-  {
-    icon: Target,
-    title: "Personalized Learning",
-    description: "Tailored approach to meet each student's unique needs and individual learning style effectively.",
-  },
-]
+import { Brain, Award, Users, Target } from "lucide-react"
+import { useLanguage } from "@/hooks/useLanguage"
 
 export function WhyChooseUs() {
+  const { t } = useLanguage()
+  
+  const features = [
+    {
+      icon: Brain,
+      title: t('why_choose.expert_tutors.title'),
+      description: t('why_choose.expert_tutors.description'),
+    },
+    {
+      icon: Award,
+      title: t('why_choose.proven_results.title'),
+      description: t('why_choose.proven_results.description'),
+    },
+    {
+      icon: Users,
+      title: t('why_choose.supportive_environment.title'),
+      description: t('why_choose.supportive_environment.description'),
+    },
+    {
+      icon: Target,
+      title: t('why_choose.personalized_learning.title'),
+      description: t('why_choose.personalized_learning.description'),
+    },
+  ]
+  
   return (
     <section className="py-16 sm:py-20 bg-[#1E1E1E]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">
-            Why Choose Highway Academy?
+<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">
+            {t('why_choose.title')}
           </h2>
           <p className="text-lg sm:text-xl text-[#AAAAAA] max-w-3xl mx-auto px-4">
-            We combine expertise, innovation, and personalized attention to create the perfect learning environment.
+            {t('why_choose.subtitle')}
           </p>
         </div>
 

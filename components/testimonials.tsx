@@ -4,111 +4,114 @@ import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-
-const testimonials = [
-  {
-    name: "Sarah El Mansouri",
-    course: "English Language Course",
-    quote:
-      "Highway Academy transformed my English skills completely. The personalized attention and expert teaching methods helped me achieve my IELTS goals.",
-    rating: 5,
-  },
-  {
-    name: "Ahmed Benali",
-    course: "Mathematics Tutoring",
-    quote:
-      "The mathematics support I received was exceptional. My grades improved dramatically, and I gained confidence in problem-solving.",
-    rating: 5,
-  },
-  {
-    name: "Fatima Zahra",
-    course: "University Preparation",
-    quote:
-      "Thanks to Highway Academy, I was well-prepared for university. The comprehensive support made all the difference in my academic journey.",
-    rating: 5,
-  },
-  {
-    name: "Youssef Alami",
-    course: "French Language Course",
-    quote:
-      "The French classes at Highway Academy are outstanding. The teachers are native speakers and the interactive approach made learning enjoyable and effective.",
-    rating: 5,
-  },
-  {
-    name: "Khadija Bennani",
-    course: "TOEFL Preparation",
-    quote:
-      "I achieved my target TOEFL score thanks to the intensive preparation program. The mock tests and personalized feedback were incredibly helpful.",
-    rating: 5,
-  },
-  {
-    name: "Omar Rachid",
-    course: "Business English",
-    quote:
-      "The Business English course helped me advance in my career. The practical approach and real-world scenarios prepared me for professional communication.",
-    rating: 5,
-  },
-  {
-    name: "Aicha Idrissi",
-    course: "Academic Support",
-    quote:
-      "My daughter's grades improved significantly after joining Highway Academy. The teachers are patient, knowledgeable, and truly care about student success.",
-    rating: 5,
-  },
-  {
-    name: "Mehdi Tazi",
-    course: "Conversation Club",
-    quote:
-      "The conversation clubs are fantastic! They helped me gain confidence in speaking English and made many new friends along the way.",
-    rating: 5,
-  },
-]
+import { useLanguage } from "@/hooks/useLanguage"
 
 export function Testimonials() {
+  const { t, isRTL } = useLanguage()
+  
+  const testimonials = [
+    {
+      name: t('testimonials.students.0.name'),
+      course: t('testimonials.students.0.course'),
+      quote: t('testimonials.students.0.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.1.name'),
+      course: t('testimonials.students.1.course'),
+      quote: t('testimonials.students.1.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.2.name'),
+      course: t('testimonials.students.2.course'),
+      quote: t('testimonials.students.2.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.3.name'),
+      course: t('testimonials.students.3.course'),
+      quote: t('testimonials.students.3.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.4.name'),
+      course: t('testimonials.students.4.course'),
+      quote: t('testimonials.students.4.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.5.name'),
+      course: t('testimonials.students.5.course'),
+      quote: t('testimonials.students.5.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.6.name'),
+      course: t('testimonials.students.6.course'),
+      quote: t('testimonials.students.6.quote'),
+      rating: 5,
+    },
+    {
+      name: t('testimonials.students.7.name'),
+      course: t('testimonials.students.7.course'),
+      quote: t('testimonials.students.7.quote'),
+      rating: 5,
+    },
+  ]
+  
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
-  // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-    }, 4000) // Change every 4 seconds
-
-    return () => clearInterval(interval)
-  }, [isAutoPlaying])
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        if (isRTL) {
+          setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+        } else {
+          setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+        }
+      }, 4000)
+      return () => clearInterval(interval)
+    }
+  }, [isAutoPlaying, testimonials.length, isRTL])
 
   const nextTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+    if (isRTL) {
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    } else {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    }
   }
 
   const prevTestimonial = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+    if (isRTL) {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    } else {
+      setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    }
   }
 
   const getVisibleTestimonials = () => {
-    const visible = []
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % testimonials.length
-      visible.push(testimonials[index])
+    const visibleCount = 3
+    if (testimonials.length <= visibleCount) {
+      return testimonials
     }
-    return visible
+    return testimonials
   }
 
   return (
     <section className="py-16 sm:py-20 bg-[#121212] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">What Our Students Say</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">{t('testimonials.title')}</h2>
           <p className="text-lg sm:text-xl text-[#AAAAAA] max-w-3xl mx-auto px-4">
-            Don't just take our word for it. Here's what our students have to say about their experience at Highway
-            Academy.
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
         <div className="relative">
-          {/* Navigation Buttons */}
+          {/* Navigation buttons */}
           <div className="flex justify-center gap-4 mb-8">
             <Button
               variant="outline"
@@ -132,10 +135,15 @@ export function Testimonials() {
             </Button>
           </div>
 
-          {/* Testimonials Carousel */}
+          {/* Testimonials carousel */}
           <div
             className="flex transition-transform duration-500 ease-in-out gap-6 sm:gap-8"
-            style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+            style={{ 
+              transform: isRTL 
+                ? `translateX(${currentIndex * (100 / 3)}%)` 
+                : `translateX(-${currentIndex * (100 / 3)}%)`,
+              direction: isRTL ? 'rtl' : 'ltr'
+            }}
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
@@ -163,7 +171,7 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Dots Indicator */}
+          {/* Dots indicator */}
           <div className="flex justify-center mt-8 gap-2">
             {testimonials.map((_, index) => (
               <button

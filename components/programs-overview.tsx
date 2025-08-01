@@ -1,42 +1,47 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BookOpen, Languages, GraduationCap } from "lucide-react"
 import Link from "next/link"
-
-const programs = [
-  {
-    icon: BookOpen,
-    title: "Academic Support",
-    description: "Comprehensive tutoring from primary school to university level across all subjects.",
-    features: ["Primary to University", "All Subjects", "Individual & Group Sessions"],
-    link: "/programs#academic",
-  },
-  {
-    icon: Languages,
-    title: "Language Courses",
-    description: "Master English, French, and other languages with our expert instructors.",
-    features: ["English & French", "All Levels (A1-C2)", "Conversation Practice"],
-    link: "/programs#language",
-  },
-  {
-    icon: GraduationCap,
-    title: "Exam Preparation",
-    description: "Specialized preparation for TOEFL, IELTS, and national examinations.",
-    features: ["TOEFL & IELTS", "National Exams", "Mock Tests"],
-    link: "/programs#exam",
-  },
-]
+import { useLanguage } from "@/hooks/useLanguage"
 
 export function ProgramsOverview() {
+  const { t } = useLanguage();
+  
+  const programs = [
+    {
+      icon: BookOpen,
+      title: t('programs_overview.academic_tutoring.title'),
+      description: t('programs_overview.academic_tutoring.description'),
+      features: t('programs_overview.academic_tutoring.features'),
+      link: "/programs#academic",
+    },
+    {
+      icon: Languages,
+      title: t('programs_overview.language_training.title'),
+      description: t('programs_overview.language_training.description'),
+      features: t('programs_overview.language_training.features'),
+      link: "/programs#language",
+    },
+    {
+      icon: GraduationCap,
+      title: t('programs_overview.test_preparation.title'),
+      description: t('programs_overview.test_preparation.description'),
+      features: t('programs_overview.test_preparation.features'),
+      link: "/programs#exam",
+    },
+  ]
+  
   return (
     <section className="py-16 sm:py-20 bg-[#121212]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">
-            Find Your Path to Excellence
+<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#F5F5F5] mb-4">
+            {t('programs_overview.main_title')}
           </h2>
           <p className="text-lg sm:text-xl text-[#AAAAAA] max-w-3xl mx-auto px-4">
-            Choose from our comprehensive range of educational programs designed to meet your specific learning goals.
+            {t('programs_overview.main_subtitle')}
           </p>
         </div>
 
@@ -55,9 +60,9 @@ export function ProgramsOverview() {
               </CardHeader>
               <CardContent className="space-y-4 flex-grow flex flex-col">
                 <ul className="space-y-2 flex-grow">
-                  {program.features.map((feature, featureIndex) => (
+                  {Array.isArray(program.features) && program.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-center text-[#AAAAAA] text-sm sm:text-base">
-                      <div className="w-2 h-2 bg-[#F95700] rounded-full mr-3 flex-shrink-0"></div>
+                      <div className="w-2 h-2 bg-[#F95700] rounded-full me-3 flex-shrink-0"></div>
                       {feature}
                     </li>
                   ))}
@@ -66,7 +71,7 @@ export function ProgramsOverview() {
                   asChild
                   className="w-full bg-transparent border border-[#F95700] text-[#F95700] hover:bg-[#F95700] hover:text-white mt-auto"
                 >
-                  <Link href={program.link}>Learn More</Link>
+<Link href={program.link}>{t('programs_overview.more_info')}</Link>
                 </Button>
               </CardContent>
             </Card>

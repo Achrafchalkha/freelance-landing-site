@@ -1,8 +1,13 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { MapPin, Phone, Mail, Instagram, Facebook } from "lucide-react"
+import { useLanguage } from "@/hooks/useLanguage"
 
 export function Footer() {
+  const { t } = useLanguage()
+  
   return (
     <footer className="bg-[#1E1E1E] border-t border-[#333]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -16,8 +21,8 @@ export function Footer() {
               height={133}
               className="h-24 sm:h-28 w-auto mb-4"
             />
-            <p className="text-[#AAAAAA] mb-4 max-w-md">
-              Where academic excellence meets personalized learning. Let us guide you to success.
+<p className="text-[#AAAAAA] mb-4 max-w-md">
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <Link
@@ -41,26 +46,26 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-[#F5F5F5] font-semibold mb-4">Quick Links</h3>
+<h3 className="text-[#F5F5F5] font-semibold mb-4">{t('footer.quick_links')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
-                  About Us
+<Link href="/about" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
-                <Link href="/programs" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
-                  Programs
+<Link href="/programs" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
+                  {t('nav.programs')}
                 </Link>
               </li>
               <li>
-                <Link href="/news" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
-                  News & Events
+<Link href="/news" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
+                  {t('nav.news_events')}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
-                  Contact
+<Link href="/contact" className="text-[#AAAAAA] hover:text-[#F95700] transition-colors">
+                  {t('nav.contact')}
                 </Link>
               </li>
             </ul>
@@ -68,7 +73,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-[#F5F5F5] font-semibold mb-4">Contact Info</h3>
+<h3 className="text-[#F5F5F5] font-semibold mb-4">{t('footer.contact_info')}</h3>
             <div className="space-y-3">
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 text-[#F95700] mt-1 flex-shrink-0" />
@@ -103,9 +108,9 @@ export function Footer() {
         </div>
 
         <div className="border-t border-[#333] mt-8 pt-8 text-center">
-          <p className="text-[#AAAAAA] text-sm">© 2025 Highway Academy. All rights reserved.</p>
+<p className="text-[#AAAAAA] text-sm">{t('footer.copyright')}</p>
           <p className="text-[#666666] text-xs mt-2">
-             created by{" "}
+             {t('footer.created_by')}{" "}
             <span className="text-[#F95700] font-medium">Achraf Chalkha</span>
           </p>
         </div>

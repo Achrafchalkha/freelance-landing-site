@@ -7,10 +7,12 @@ import { usePathname } from "next/navigation"
 import { Menu, X, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { useLanguage } from "@/hooks/useLanguage"
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+  const { t } = useLanguage()
 
   const isActive = (path: string) => {
     if (path === "/" && pathname === "/") return true
@@ -47,7 +49,7 @@ export function Navigation() {
                     : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                 }`}
               >
-                Home
+{t('nav.home')}
               </Link>
               <Link
                 href="/about"
@@ -58,7 +60,7 @@ export function Navigation() {
                     : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                 }`}
               >
-                About Us
+{t('nav.about')}
               </Link>
               <DropdownMenu>
                 <DropdownMenuTrigger
@@ -68,17 +70,17 @@ export function Navigation() {
                       : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                   }`}
                 >
-                  Programs <ChevronDown className="ml-1 h-3 w-3" />
+{t('nav.programs')} <ChevronDown className="ml-1 h-3 w-3" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-[#1E1E1E] border-[#333] mt-2">
                   <DropdownMenuItem asChild>
                     <Link href="/programs?tab=language" prefetch={true} className="text-[#F5F5F5] hover:text-[#F95700] cursor-pointer">
-                      Language & Skills Courses
+{t('nav.language_skills')}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link href="/programs?tab=academic" prefetch={true} className="text-[#F5F5F5] hover:text-[#F95700] cursor-pointer">
-                      Academic Support
+{t('nav.academic_support')}
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -92,7 +94,7 @@ export function Navigation() {
                     : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                 }`}
               >
-                News & Events
+{t('nav.news_events')}
               </Link>
             </div>
           </div>
@@ -107,7 +109,7 @@ export function Navigation() {
                   : "bg-[#F95700] hover:bg-[#E04E00] text-white hover:shadow-lg"
               }`}
             >
-              <Link href="/contact" prefetch={true}>Contact</Link>
+<Link href="/contact" prefetch={true}>{t('nav.contact')}</Link>
             </Button>
           </div>
 
@@ -132,7 +134,7 @@ export function Navigation() {
                       : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                   }`}
                 >
-                  Home
+{t('nav.home')}
                 </Link>
                 <Link
                   href="/about"
@@ -142,7 +144,7 @@ export function Navigation() {
                       : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                   }`}
                 >
-                  About Us
+{t('nav.about')}
                 </Link>
                 <Link
                   href="/programs"
@@ -152,7 +154,7 @@ export function Navigation() {
                       : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                   }`}
                 >
-                  Programs
+{t('nav.programs')}
                 </Link>
                 <Link
                   href="/news"
@@ -162,7 +164,7 @@ export function Navigation() {
                       : "text-[#F5F5F5] hover:bg-[#404040] hover:text-[#F95700]"
                   }`}
                 >
-                  News & Events
+{t('nav.news_events')}
                 </Link>
               </div>
             </div>
@@ -175,7 +177,7 @@ export function Navigation() {
                     : "bg-[#F95700] hover:bg-[#E04E00] text-white hover:shadow-lg"
                 }`}
               >
-                <Link href="/contact">Contact</Link>
+<Link href="/contact">{t('nav.contact')}</Link>
               </Button>
             </div>
           </div>
