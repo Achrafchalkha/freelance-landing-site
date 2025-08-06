@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     'French courses', 'IELTS preparation', 'TOEFL preparation', 'academic support Morocco',
     'tutoring Fez', 'university preparation', 'conversation clubs', 'Montfleuri', 'Narjiss'
   ],
-  authors: [{ name: 'Highway Academy', url: 'https://highwayacademy.ma' }],
+  authors: [{ name: 'Highway Academy', url: 'https://www.highwayacademy.ma' }],
   creator: 'Highway Academy',
   publisher: 'Highway Academy',
   robots: {
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://highwayacademy.ma',
+    url: 'https://www.highwayacademy.ma',
     siteName: 'Highway Academy',
     title: 'Highway Academy - Professional Education in Fez, Morocco',
     description: 'Leading education center in Fez offering academic support, language courses, and exam preparation.',
     images: [
       {
-        url: '/logo.png',
+        url: 'https://www.highwayacademy.ma/logo.png',
         width: 1200,
         height: 630,
         alt: 'Highway Academy Logo',
@@ -64,13 +64,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Highway Academy - Professional Education in Fez, Morocco',
     description: 'Leading education center in Fez offering academic support, language courses, and exam preparation.',
-    images: ['/logo.png'],
+    images: ['https://www.highwayacademy.ma/logo.png'],
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual verification code
+    google: 'svqLgvsjpugCQk72lNiQEmn_jmEXLABj9_eruZH0MuM',
   },
   alternates: {
-    canonical: 'https://highwayacademy.ma',
+    canonical: 'https://www.highwayacademy.ma',
   },
   icons: {
     icon: [
@@ -104,9 +104,9 @@ export default function RootLayout({
               "name": "Highway Academy",
               "alternateName": "Highway Academy Fez",
               "description": "Professional education academy in Fez, Morocco offering academic support, language courses, and exam preparation from primary school to university level.",
-              "url": "https://highwayacademy.ma",
-              "logo": "https://highwayacademy.ma/logo.png",
-              "image": "https://highwayacademy.ma/logo.png",
+              "url": "https://www.highwayacademy.ma",
+              "logo": "https://www.highwayacademy.ma/logo.png",
+              "image": "https://www.highwayacademy.ma/logo.png",
               "telephone": ["+212535765701", "+212535614990"],
               "email": "highwayaca@gmail.com",
               "address": [
